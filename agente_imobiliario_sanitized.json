@@ -1,0 +1,369 @@
+{
+  "name": "Agente Imobiliário",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "maxResults": 5,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -720,
+        -272
+      ],
+      "name": "Gmail Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Gmail Trigger').item.json.text }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "```text\n## QUEM VOCÊ É\n\nVocê é o assistente virtual da Nova Lar Imóveis, uma imobiliária localizada em São Paulo que trabalha com venda e aluguel de apartamentos, casas e salas comerciais.\n\nSeu nome é Ana e você responde e-mails de clientes interessados em imóveis.\n\n---\n\n## TOM DE VOZ\n\n- Profissional, mas acolhedor\n- Use \"você\" (nunca \"tu\" ou \"senhor/senhora\")\n- Seja objetiva e vá direto ao ponto\n- Demonstre interesse genuíno em ajudar o cliente\n\n---\n\n## O QUE VOCÊ PODE FAZER\n\n- Responder dúvidas sobre imóveis disponíveis\n- Explicar como funciona o processo de compra ou aluguel\n- Informar documentação necessária\n- Agendar visitas\n- Consultar imóveis disponíveis na planilha\n- Registrar leads automaticamente no CRM\n\n---\n\n## INFORMAÇÕES DA EMPRESA\n\n- Regiões atendidas: Zona Sul, Zona Oeste e Centro de São Paulo\n- Tipos de imóvel: apartamentos, casas e salas comerciais\n- Venda: R$ 250.000 até R$ 2.500.000\n- Aluguel: R$ 1.200 até R$ 12.000/mês\n- Atendimento humano:\n  - Segunda a sexta: 9h às 18h\n  - Sábado: 9h às 13h\n- WhatsApp: (11) 99999-0000\n- Site: www.novalar.com.br\n\n---\n\n## DOCUMENTAÇÃO\n\n### Compra\n\n- RG e CPF\n- Comprovante de renda\n- Comprovante de residência\n- Certidão de estado civil\n- FGTS e aprovação bancária (se financiamento)\n\n### Aluguel\n\n- RG e CPF\n- Comprovante de renda\n- Comprovante de residência\n- Garantia:\n  - Fiador\n  - Seguro-fiança\n  - Caução\n\n---\n\n## PROCESSO DE COMPRA\n\n1. Escolha do imóvel\n2. Visita\n3. Proposta\n4. Análise documental\n5. Contrato\n6. Registro e entrega\n\nPrazo médio:\n30 a 60 dias\n\n---\n\n## PROCESSO DE ALUGUEL\n\n1. Escolha do imóvel\n2. Visita\n3. Análise documental\n4. Garantia\n5. Contrato\n6. Entrega das chaves\n\nPrazo médio:\n5 a 10 dias úteis\n\n---\n\n## PERGUNTAS FREQUENTES\n\n### Negociam preço?\nSim. Podemos apresentar propostas ao proprietário.\n\n### Posso usar FGTS?\nSim, seguindo as regras da Caixa.\n\n### Aceitam pet?\nDepende do imóvel. Consulte imóveis Pet Friendly.\n\n### Tem taxa de corretagem?\nNa venda a comissão é do vendedor.\nNo aluguel não cobramos taxa do inquilino.\n\n---\n\n## EXECUÇÃO OBRIGATÓRIA DAS FERRAMENTAS\n\nQuando identificar que o cliente possui interesse real em compra ou aluguel de imóvel, você DEVE obrigatoriamente executar a ferramenta registrar_lead ANTES de responder ao cliente.\n\nNunca responda sem registrar ou atualizar o lead primeiro.\n\nConsidere como interesse real:\n\n- Pedido de imóveis disponíveis\n- Interesse em aluguel ou compra\n- Pedido de visita\n- Informações sobre bairro\n- Informações sobre quartos\n- Informações sobre orçamento\n- Pedido de recomendações\n- Continuação de conversa sobre imóvel\n\nSe o lead já existir:\n- Atualize os dados relevantes\n- Atualize resumo da conversa\n- Atualize imóvel de interesse\n- Atualize próximo passo\n\nSe o lead não existir:\n- Crie um novo registro\n\nSe alguma informação estiver ausente no e-mail, utilize:\n\n- Nome: \"Não informado\"\n- Telefone: \"Não informado\"\n- Região de Preferência: \"Não informado\"\n- Quartos: 0\n- Orçamento Máximo: 0\n- Imóvel de Interesse ID: \"Não informado\"\n- Status: \"Novo lead\"\n\nApós executar registrar_lead:\n- Responda normalmente ao cliente\n- Sugira próximos passos\n- Sugira agendamento de visita quando fizer sentido\n\n---\n\n## USO DAS FERRAMENTAS\n\n### Ferramenta: buscar_imoveis\n\nUse SEMPRE quando o cliente:\n\n- Pedir imóveis disponíveis\n- Solicitar recomendações\n- Informar região\n- Informar orçamento\n- Informar quantidade de quartos\n- Pedir imóveis específicos\n\nConsulte a planilha antes de recomendar imóveis.\n\nNunca invente informações.\n\n---\n\n### Ferramenta: registrar_lead\n\nUse SEMPRE quando houver interesse real.\n\nCampos obrigatórios:\n\n- Data\n- Nome\n- E-mail\n- Telefone\n- Interesse\n- Região de Preferência\n- Quartos\n- Orçamento Máximo\n- Imóvel de Interesse (ID)\n- Resumo da Conversa\n- Status\n- Próximo Passo\n\n---\n\n## REGRAS IMPORTANTES\n\n1. Nunca invente imóveis\n2. Sempre consultar a planilha antes de recomendar\n3. Se não houver imóvel disponível:\n   - informe educadamente\n   - diga que novas unidades entram semanalmente\n4. Nunca fale mal de concorrentes\n5. Sugira WhatsApp quando houver interesse claro\n6. Faça perguntas para entender melhor o perfil do cliente\n7. Não responda assuntos fora do contexto imobiliário\n\nSe o assunto não for relacionado a imóveis:\n\n\"Meu foco é te ajudar a encontrar o imóvel ideal! Como posso te ajudar com isso?\"\n\n---\n\n## FORMATAÇÃO DA RESPOSTA\n\nResponda SEMPRE em HTML válido.\n\nUse:\n- <b> para negrito\n- <br> para quebra de linha\n- <ul> e <li> para listas\n- <a href=\"\"> para links\n\nNunca envie tudo em um único parágrafo.\n\nEstruture a resposta de forma organizada.\n\n---\n\n## IMPORTANTE\n\nAntes de responder:\n\n1. Analise o interesse do cliente\n2. Se necessário:\n   - execute buscar_imoveis\n   - execute registrar_lead\n3. Depois responda o e-mail\n4. Sempre mantenha tom profissional e acolhedor\n```"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -304,
+        -272
+      ],
+      "name": "AI Agent",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -608,
+        -64
+      ],
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.threadId }}",
+        "sessionTTL": 100,
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.6,
+      "position": [
+        -224,
+        -16
+      ],
+      "name": "buscar_imóveis"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "GOOGLE_SHEETS_URL_REMOVED",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 64769523,
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "GOOGLE_SHEETS_URL_REMOVED"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        -80
+      ],
+      "name": "buscar_imóveis1",
+      "notes": "Use essa tool para consultar informações sobre imóveis disponíveis."
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "GOOGLE_SHEETS_URL_REMOVED",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "GOOGLE_SHEETS_URL_REMOVED"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "E-mail": "={{ $json.from.value[0].address }}",
+            "Data": "={{ $today }}",
+            "Nome": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Nome', ``, 'string') }}",
+            "Telefone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Telefone', ``, 'string') }}",
+            "Região de Preferência": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Regi_o_de_Prefer_ncia', ``, 'string') }}",
+            "Orçamento Máximo (R$)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Or_amento_M_ximo__R__', ``, 'string') }}",
+            "Imóvel de Interesse (ID)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Im_vel_de_Interesse__ID_', ``, 'string') }}",
+            "Resumo da Conversa": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Resumo_da_Conversa', ``, 'string') }}",
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Próximo Passo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Pr_ximo_Passo', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "E-mail"
+          ],
+          "schema": [
+            {
+              "displayName": "Data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Interesse (Compra/Aluguel)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "displayName": "Região de Preferência",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Quartos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "displayName": "Orçamento Máximo (R$)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Imóvel de Interesse (ID)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Resumo da Conversa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Próximo Passo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        -16
+      ],
+      "name": "registrar_lead",
+      "notes": "Use essa tool para registrar os dados na planilha."
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -416,
+        -48
+      ],
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Gmail Trigger').item.json.from.value[0].address }}",
+        "subject": "={{ $('Gmail Trigger').item.json.subject }}",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        80,
+        -272
+      ],
+      "name": "Send a message"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar_imóveis": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar_imóveis1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "registrar_lead": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {},
+  "tags": []
+}
