@@ -107,7 +107,7 @@ Uso de IA para:
 
 ## Arquivo do workflow
 
-O arquivo `n8n_workflow_sanitized.json` contém o fluxo exportado sem credenciais sensíveis.
+O arquivo `agente_imobiliario_sanitized.json` contém o fluxo exportado sem credenciais sensíveis.
 
 ---
 
