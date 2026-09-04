@@ -29,7 +29,7 @@
         "text": "={{ $('Gmail Trigger').item.json.text }}",
         "needsFallback": true,
         "options": {
-          "systemMessage": "```text\n## QUEM VOCÊ É\n\nVocê é o assistente virtual da Nova Lar Imóveis, uma imobiliária localizada em São Paulo que trabalha com venda e aluguel de apartamentos, casas e salas comerciais.\n\nSeu nome é Ana e você responde e-mails de clientes interessados em imóveis.\n\n---\n\n## TOM DE VOZ\n\n- Profissional, mas acolhedor\n- Use \"você\" (nunca \"tu\" ou \"senhor/senhora\")\n- Seja objetiva e vá direto ao ponto\n- Demonstre interesse genuíno em ajudar o cliente\n\n---\n\n## O QUE VOCÊ PODE FAZER\n\n- Responder dúvidas sobre imóveis disponíveis\n- Explicar como funciona o processo de compra ou aluguel\n- Informar documentação necessária\n- Agendar visitas\n- Consultar imóveis disponíveis na planilha\n- Registrar leads automaticamente no CRM\n\n---\n\n## INFORMAÇÕES DA EMPRESA\n\n- Regiões atendidas: Zona Sul, Zona Oeste e Centro de São Paulo\n- Tipos de imóvel: apartamentos, casas e salas comerciais\n- Venda: R$ 250.000 até R$ 2.500.000\n- Aluguel: R$ 1.200 até R$ 12.000/mês\n- Atendimento humano:\n  - Segunda a sexta: 9h às 18h\n  - Sábado: 9h às 13h\n- WhatsApp: (11) 99999-0000\n- Site: www.novalar.com.br\n\n---\n\n## DOCUMENTAÇÃO\n\n### Compra\n\n- RG e CPF\n- Comprovante de renda\n- Comprovante de residência\n- Certidão de estado civil\n- FGTS e aprovação bancária (se financiamento)\n\n### Aluguel\n\n- RG e CPF\n- Comprovante de renda\n- Comprovante de residência\n- Garantia:\n  - Fiador\n  - Seguro-fiança\n  - Caução\n\n---\n\n## PROCESSO DE COMPRA\n\n1. Escolha do imóvel\n2. Visita\n3. Proposta\n4. Análise documental\n5. Contrato\n6. Registro e entrega\n\nPrazo médio:\n30 a 60 dias\n\n---\n\n## PROCESSO DE ALUGUEL\n\n1. Escolha do imóvel\n2. Visita\n3. Análise documental\n4. Garantia\n5. Contrato\n6. Entrega das chaves\n\nPrazo médio:\n5 a 10 dias úteis\n\n---\n\n## PERGUNTAS FREQUENTES\n\n### Negociam preço?\nSim. Podemos apresentar propostas ao proprietário.\n\n### Posso usar FGTS?\nSim, seguindo as regras da Caixa.\n\n### Aceitam pet?\nDepende do imóvel. Consulte imóveis Pet Friendly.\n\n### Tem taxa de corretagem?\nNa venda a comissão é do vendedor.\nNo aluguel não cobramos taxa do inquilino.\n\n---\n\n## EXECUÇÃO OBRIGATÓRIA DAS FERRAMENTAS\n\nQuando identificar que o cliente possui interesse real em compra ou aluguel de imóvel, você DEVE obrigatoriamente executar a ferramenta registrar_lead ANTES de responder ao cliente.\n\nNunca responda sem registrar ou atualizar o lead primeiro.\n\nConsidere como interesse real:\n\n- Pedido de imóveis disponíveis\n- Interesse em aluguel ou compra\n- Pedido de visita\n- Informações sobre bairro\n- Informações sobre quartos\n- Informações sobre orçamento\n- Pedido de recomendações\n- Continuação de conversa sobre imóvel\n\nSe o lead já existir:\n- Atualize os dados relevantes\n- Atualize resumo da conversa\n- Atualize imóvel de interesse\n- Atualize próximo passo\n\nSe o lead não existir:\n- Crie um novo registro\n\nSe alguma informação estiver ausente no e-mail, utilize:\n\n- Nome: \"Não informado\"\n- Telefone: \"Não informado\"\n- Região de Preferência: \"Não informado\"\n- Quartos: 0\n- Orçamento Máximo: 0\n- Imóvel de Interesse ID: \"Não informado\"\n- Status: \"Novo lead\"\n\nApós executar registrar_lead:\n- Responda normalmente ao cliente\n- Sugira próximos passos\n- Sugira agendamento de visita quando fizer sentido\n\n---\n\n## USO DAS FERRAMENTAS\n\n### Ferramenta: buscar_imoveis\n\nUse SEMPRE quando o cliente:\n\n- Pedir imóveis disponíveis\n- Solicitar recomendações\n- Informar região\n- Informar orçamento\n- Informar quantidade de quartos\n- Pedir imóveis específicos\n\nConsulte a planilha antes de recomendar imóveis.\n\nNunca invente informações.\n\n---\n\n### Ferramenta: registrar_lead\n\nUse SEMPRE quando houver interesse real.\n\nCampos obrigatórios:\n\n- Data\n- Nome\n- E-mail\n- Telefone\n- Interesse\n- Região de Preferência\n- Quartos\n- Orçamento Máximo\n- Imóvel de Interesse (ID)\n- Resumo da Conversa\n- Status\n- Próximo Passo\n\n---\n\n## REGRAS IMPORTANTES\n\n1. Nunca invente imóveis\n2. Sempre consultar a planilha antes de recomendar\n3. Se não houver imóvel disponível:\n   - informe educadamente\n   - diga que novas unidades entram semanalmente\n4. Nunca fale mal de concorrentes\n5. Sugira WhatsApp quando houver interesse claro\n6. Faça perguntas para entender melhor o perfil do cliente\n7. Não responda assuntos fora do contexto imobiliário\n\nSe o assunto não for relacionado a imóveis:\n\n\"Meu foco é te ajudar a encontrar o imóvel ideal! Como posso te ajudar com isso?\"\n\n---\n\n## FORMATAÇÃO DA RESPOSTA\n\nResponda SEMPRE em HTML válido.\n\nUse:\n- <b> para negrito\n- <br> para quebra de linha\n- <ul> e <li> para listas\n- <a href=\"\"> para links\n\nNunca envie tudo em um único parágrafo.\n\nEstruture a resposta de forma organizada.\n\n---\n\n## IMPORTANTE\n\nAntes de responder:\n\n1. Analise o interesse do cliente\n2. Se necessário:\n   - execute buscar_imoveis\n   - execute registrar_lead\n3. Depois responda o e-mail\n4. Sempre mantenha tom profissional e acolhedor\n```"
+          "systemMessage": "```text\n## WHO YOU ARE\n\nYou are the virtual assistant for Nova Lar Imóveis, a real estate agency located in São Paulo that sells and rents apartments, houses and commercial units.\n\nYour name is Ana and you reply to emails from clients interested in properties.\n\n---\n\n## TONE OF VOICE\n\n- Professional but warm and welcoming\n- Always write your replies in English\n- Use a friendly, informal-professional tone (avoid overly formal titles)\n- Be objective and get straight to the point\n- Show genuine interest in helping the client\n\n---\n\n## WHAT YOU CAN DO\n\n- Answer questions about available properties\n- Explain how the purchase or rental process works\n- Inform clients about required documentation\n- Schedule visits\n- Look up available properties in the spreadsheet\n- Automatically register leads in the CRM\n\n---\n\n## COMPANY INFORMATION\n\n- Areas served: South Zone, West Zone and Downtown São Paulo\n- Property types: apartments, houses and commercial units\n- Sale price range: R$ 250,000 to R$ 2,500,000\n- Rental price range: R$ 1,200 to R$ 12,000/month\n- Human support hours:\n  - Monday to Friday: 9am to 6pm\n  - Saturday: 9am to 1pm\n- WhatsApp: (11) 99999-0000\n- Website: www.novalar.com.br\n\n---\n\n## REQUIRED DOCUMENTATION\n\n### Purchase\n\n- ID and Tax ID (RG and CPF)\n- Proof of income\n- Proof of address\n- Marital status certificate\n- FGTS and bank loan approval (if financing)\n\n### Rental\n\n- ID and Tax ID (RG and CPF)\n- Proof of income\n- Proof of address\n- Guarantee:\n  - Guarantor\n  - Lease insurance (seguro-fiança)\n  - Security deposit\n\n---\n\n## PURCHASE PROCESS\n\n1. Property selection\n2. Visit\n3. Offer\n4. Document review\n5. Contract\n6. Registration and handover\n\nAverage timeline:\n30 to 60 days\n\n---\n\n## RENTAL PROCESS\n\n1. Property selection\n2. Visit\n3. Document review\n4. Guarantee\n5. Contract\n6. Key handover\n\nAverage timeline:\n5 to 10 business days\n\n---\n\n## FREQUENTLY ASKED QUESTIONS\n\n### Do you negotiate the price?\nYes. We can present offers to the property owner.\n\n### Can I use FGTS?\nYes, following Caixa's (Brazil's federal savings bank) rules.\n\n### Do you accept pets?\nIt depends on the property. Ask about Pet Friendly listings.\n\n### Is there a brokerage fee?\nOn sales, the commission is paid by the seller.\nOn rentals, we do not charge the tenant any fee.\n\n---\n\n## MANDATORY TOOL EXECUTION\n\nWhen you identify that the client has genuine interest in buying or renting a property, you MUST execute the \"Register Lead in CRM\" tool BEFORE replying to the client.\n\nNever reply without registering or updating the lead first.\n\nConsider the following as genuine interest:\n\n- Requests for available properties\n- Interest in renting or buying\n- Visit requests\n- Questions about neighborhoods\n- Questions about number of bedrooms\n- Questions about budget\n- Requests for recommendations\n- Continuation of a previous conversation about a property\n\nIf the lead already exists:\n- Update the relevant data\n- Update the conversation summary\n- Update the property of interest\n- Update the next step\n\nIf the lead does not exist yet:\n- Create a new record\n\nIf any information is missing from the email, use:\n\n- Name: \"Not provided\"\n- Phone: \"Not provided\"\n- Preferred Region: \"Not provided\"\n- Bedrooms: 0\n- Maximum Budget: 0\n- Property of Interest ID: \"Not provided\"\n- Status: \"New lead\"\n\nAfter executing the \"Register Lead in CRM\" tool:\n- Reply normally to the client\n- Suggest next steps\n- Suggest scheduling a visit when appropriate\n\n---\n\n## TOOL USAGE\n\n### Tool: Search Available Properties\n\nALWAYS use this tool when the client:\n\n- Asks for available properties\n- Requests recommendations\n- Mentions a region\n- Mentions a budget\n- Mentions a number of bedrooms\n- Asks for specific properties\n\nCheck the spreadsheet before recommending properties.\n\nNever make up information.\n\n---\n\n### Tool: Register Lead in CRM\n\nALWAYS use this tool when there is genuine interest.\n\nRequired fields:\n\n- Date\n- Name\n- Email\n- Phone\n- Interest\n- Preferred Region\n- Bedrooms\n- Maximum Budget\n- Property of Interest (ID)\n- Conversation Summary\n- Status\n- Next Step\n\n---\n\n## IMPORTANT RULES\n\n1. Never make up properties\n2. Always check the spreadsheet before recommending anything\n3. If no property is available:\n   - inform the client politely\n   - mention that new units are added every week\n4. Never speak badly about competitors\n5. Suggest WhatsApp when there is clear interest\n6. Ask questions to better understand the client's profile\n7. Do not answer questions unrelated to real estate\n\nIf the topic is not related to real estate:\n\n\"My focus is helping you find the ideal property! How can I help you with that?\"\n\n---\n\n## RESPONSE FORMATTING\n\nALWAYS reply in valid HTML.\n\nUse:\n- <b> for bold\n- <br> for line breaks\n- <ul> and <li> for lists\n- <a href=\"\"> for links\n\nNever send everything as a single paragraph.\n\nStructure the response clearly and neatly.\n\n---\n\n## IMPORTANT\n\nBefore replying:\n\n1. Analyze the client's interest\n2. If necessary:\n   - execute the Search Available Properties tool\n   - execute the Register Lead in CRM tool\n3. Then reply to the email\n4. Always keep a professional and welcoming tone\n```"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -38,7 +38,7 @@
         -304,
         -272
       ],
-      "name": "AI Agent",
+      "name": "Real Estate AI Agent",
       "retryOnFail": true,
       "maxTries": 2,
       "waitBetweenTries": 5000
@@ -54,7 +54,7 @@
         -608,
         -64
       ],
-      "name": "Google Gemini Chat Model"
+      "name": "Primary AI Model (Google Gemini)"
     },
     {
       "parameters": {
@@ -69,7 +69,7 @@
         -224,
         -16
       ],
-      "name": "buscar_imóveis"
+      "name": "Conversation Memory (Redis)"
     },
     {
       "parameters": {
@@ -82,7 +82,7 @@
           "__rl": true,
           "value": 64769523,
           "mode": "list",
-          "cachedResultName": "Página1",
+          "cachedResultName": "Sheet1",
           "cachedResultUrl": "GOOGLE_SHEETS_URL_REMOVED"
         },
         "options": {}
@@ -93,8 +93,8 @@
         208,
         -80
       ],
-      "name": "buscar_imóveis1",
-      "notes": "Use essa tool para consultar informações sobre imóveis disponíveis."
+      "name": "Search Available Properties (Google Sheets)",
+      "notes": "Use this tool to look up available properties."
     },
     {
       "parameters": {
@@ -108,7 +108,7 @@
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "Página1",
+          "cachedResultName": "Sheet1",
           "cachedResultUrl": "GOOGLE_SHEETS_URL_REMOVED"
         },
         "columns": {
@@ -240,8 +240,8 @@
         -64,
         -16
       ],
-      "name": "registrar_lead",
-      "notes": "Use essa tool para registrar os dados na planilha."
+      "name": "Register Lead in CRM (Google Sheets)",
+      "notes": "Use this tool to register the lead data in the spreadsheet."
     },
     {
       "parameters": {
@@ -259,7 +259,7 @@
         -416,
         -48
       ],
-      "name": "OpenAI Chat Model"
+      "name": "Fallback AI Model (OpenAI)"
     },
     {
       "parameters": {
@@ -276,7 +276,127 @@
         80,
         -272
       ],
-      "name": "Send a message"
+      "name": "Send Email Reply (Gmail)"
+    },
+    {
+      "parameters": {
+        "content": "## Workflow Overview\n\nThis template automates first-line email responses for real estate inquiries.\n\n**Flow:**\n1. Gmail Trigger polls the inbox for new emails\n2. The AI Agent interprets the client's intent\n3. The agent searches available properties in Google Sheets when relevant\n4. The agent creates/updates a lead in a Google Sheets CRM when there is real interest\n5. The agent replies to the client by email (HTML formatted)\n6. Conversation context is kept in Redis, keyed by the Gmail thread ID\n\nThe AI persona, business rules, property list and CRM data are example content — replace them with your own before going live.",
+        "height": 340,
+        "width": 480,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1300,
+        -900
+      ],
+      "name": "Sticky Note - Overview"
+    },
+    {
+      "parameters": {
+        "content": "## Required Credentials\n\nNo credentials are included in this template. After importing, configure your own for:\n\n- **Gmail OAuth2** — used by \"Gmail Trigger\" and \"Send Email Reply (Gmail)\"\n- **Google Sheets OAuth2** — used by \"Search Available Properties\" and \"Register Lead in CRM\"\n- **Google Gemini (PaLM) API** — used by \"Primary AI Model (Google Gemini)\"\n- **OpenAI API** — used by \"Fallback AI Model (OpenAI)\"\n- **Redis** — used by \"Conversation Memory (Redis)\"\n\nEvery credential-enabled node will show \"No credential selected\" right after import.",
+        "height": 340,
+        "width": 480,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -900
+      ],
+      "name": "Sticky Note - Credentials"
+    },
+    {
+      "parameters": {
+        "content": "## Customize the AI Persona\n\nThe system prompt on \"Real Estate AI Agent\" is example content for a fictitious agency and is written in Portuguese (the template was built for the Brazilian market).\n\nTo adapt it:\n- Open the \"Real Estate AI Agent\" node and edit the system message: company name, service area, price ranges, business hours, contact info, required documents and FAQs\n- Translate the prompt if you serve a different language/market\n- Keep the tool-usage instructions intact — the agent relies on that logic to decide when to call the property search and lead registration tools",
+        "height": 340,
+        "width": 480,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        -900
+      ],
+      "name": "Sticky Note - AI Persona"
+    },
+    {
+      "parameters": {
+        "content": "## Trigger / Input Configuration\n\n**Node:** Gmail Trigger\n\n- Polls the connected Gmail inbox every minute for new emails\n- Requires a Gmail OAuth2 credential with read access\n- `maxResults` is set to 5 emails per poll — raise it if you expect higher volume\n- Several downstream nodes reference this node by name (`$('Gmail Trigger')`) to read the sender address, subject and body — do not rename it without updating those expressions",
+        "height": 380,
+        "width": 360,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -900,
+        150
+      ],
+      "name": "Sticky Note - Trigger"
+    },
+    {
+      "parameters": {
+        "content": "## AI Model Configuration\n\n**Nodes:** Primary AI Model (Google Gemini) / Fallback AI Model (OpenAI)\n\n- The agent uses Google Gemini (gemini-2.5-flash) as its primary language model\n- If the primary model fails, it automatically falls back to OpenAI (gpt-5-mini) — this is why \"Real Estate AI Agent\" has `needsFallback` enabled\n- Add your own Google Gemini and OpenAI credentials on these two nodes\n- Model names/versions can be changed independently on each node",
+        "height": 380,
+        "width": 400,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -510,
+        150
+      ],
+      "name": "Sticky Note - AI Model"
+    },
+    {
+      "parameters": {
+        "content": "## Conversation Memory (Redis)\n\n**Node:** Conversation Memory (Redis)\n\n- Stores short-term conversation history per email thread (`sessionKey` = Gmail `threadId`)\n- Requires a running Redis instance and credential\n- `sessionTTL` = 100s and `contextWindowLength` = 30 messages — tune to your needs\n- Without Redis configured, the agent will not remember earlier messages in the same thread",
+        "height": 380,
+        "width": 360,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        150
+      ],
+      "name": "Sticky Note - Redis"
+    },
+    {
+      "parameters": {
+        "content": "## CRM / Google Sheets Configuration\n\n**Nodes:** Search Available Properties / Register Lead in CRM\n\nThis template expects TWO Google Sheets tabs of your own:\n\n1. **Properties sheet** — read by \"Search Available Properties\". Suggested columns: ID, Tipo, Modalidade, Bairro, Metragem, Quartos, Suítes, Vagas, Preço, Condomínio, Destaques\n2. **Leads/CRM sheet** — written by \"Register Lead in CRM\" (append or update, matched on E-mail). Suggested columns: Data, Nome, E-mail, Telefone, Região de Preferência, Orçamento Máximo, Imóvel de Interesse (ID), Resumo da Conversa, Status, Próximo Passo\n\nAfter importing, open both nodes and select your own spreadsheet and sheet tab — the original document reference has been removed.",
+        "height": 380,
+        "width": 460,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        320,
+        150
+      ],
+      "name": "Sticky Note - CRM Sheets"
+    },
+    {
+      "parameters": {
+        "content": "## Email Reply Configuration\n\n**Node:** Send Email Reply (Gmail)\n\n- Replies to the original sender, reusing the original subject line\n- Sends the AI Agent's output as HTML\n- Requires the same Gmail account as the trigger (with send permission)",
+        "height": 380,
+        "width": 340,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        830,
+        150
+      ],
+      "name": "Sticky Note - Email Reply"
     }
   ],
   "pinData": {},
@@ -285,73 +405,73 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Real Estate AI Agent",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Google Gemini Chat Model": {
+    "Primary AI Model (Google Gemini)": {
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Real Estate AI Agent",
             "type": "ai_languageModel",
             "index": 0
           }
         ]
       ]
     },
-    "buscar_imóveis": {
+    "Conversation Memory (Redis)": {
       "ai_memory": [
         [
           {
-            "node": "AI Agent",
+            "node": "Real Estate AI Agent",
             "type": "ai_memory",
             "index": 0
           }
         ]
       ]
     },
-    "buscar_imóveis1": {
+    "Search Available Properties (Google Sheets)": {
       "ai_tool": [
         [
           {
-            "node": "AI Agent",
+            "node": "Real Estate AI Agent",
             "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "registrar_lead": {
+    "Register Lead in CRM (Google Sheets)": {
       "ai_tool": [
         [
           {
-            "node": "AI Agent",
+            "node": "Real Estate AI Agent",
             "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "OpenAI Chat Model": {
+    "Fallback AI Model (OpenAI)": {
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Real Estate AI Agent",
             "type": "ai_languageModel",
             "index": 1
           }
         ]
       ]
     },
-    "AI Agent": {
+    "Real Estate AI Agent": {
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Send Email Reply (Gmail)",
             "type": "main",
             "index": 0
           }
