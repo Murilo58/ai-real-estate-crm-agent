@@ -73,7 +73,7 @@ None of the credentials are included in the exported JSON. After importing, you 
 
 ## Installation
 
-1. In n8n, go to **Workflows → Import from File** and select `agente_imobiliario_sanitized.json`.
+1. In n8n, go to **Workflows → Import from File** and select `AI Real Estate CRM Agent.json`.
 2. Open every credential-enabled node and assign your own credential (see table above).
 3. Open **Search Available Properties** and **Register Lead in CRM** and point each one to your own Google Sheets document and tab (the original document reference has been removed from the template).
 4. Review and edit the system prompt on **Real Estate AI Agent** to reflect your own business (see [Configuration Guide](#configuration-guide)).
@@ -103,7 +103,7 @@ The **Real Estate AI Agent** node is a LangChain agent that:
 
 ## CRM / Lead Management
 
-Leads are captured only when the agent detects genuine interest (property requests, budget/region/room information, visit requests, etc.), as defined in the system prompt. Missing fields are filled with default placeholder values (e.g. "Não informado", 0) so the row is never left incomplete. Existing leads are matched by email and updated rather than duplicated.
+Leads are captured only when the agent detects genuine interest (property requests, budget/region/room information, visit requests, etc.), as defined in the system prompt. Missing fields are filled with default placeholder values (e.g. "Not provided", 0) so the row is never left incomplete. Existing leads are matched by email and updated rather than duplicated.
 
 ## Testing
 
@@ -149,14 +149,10 @@ To test after installation:
 
 ```
 .
-├── agente_imobiliario_sanitized.json   # Sanitized n8n workflow — import this file
+├── AI Real Estate CRM Agent.json       # Sanitized n8n workflow — import this file
 ├── README.md                           # This file
 └── imagem/                             # Reference screenshots
-    ├── 01-workflow-completo.png
-    ├── 02-google-sheets-crm.png
-    ├── 03-email-response.png
-    ├── 04-agent-tools.png
-    └── 05-execucao-sucesso.png
+    └── 02-google-sheets-properties.png
 ```
 
 ## License

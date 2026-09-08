@@ -1,0 +1,505 @@
+{
+  "name": "AI Real Estate CRM Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "maxResults": 5,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        592,
+        752
+      ],
+      "name": "Gmail Trigger",
+      "id": "64a00e3a-f076-478c-953f-afb667a4f675"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Gmail Trigger').item.json.text }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "```text\n## WHO YOU ARE\n\nYou are the virtual assistant for Nova Lar Imóveis, a real estate agency located in São Paulo that sells and rents apartments, houses and commercial units.\n\nYour name is Ana and you reply to emails from clients interested in properties.\n\n---\n\n## TONE OF VOICE\n\n- Professional but warm and welcoming\n- Always write your replies in English\n- Use a friendly, informal-professional tone (avoid overly formal titles)\n- Be objective and get straight to the point\n- Show genuine interest in helping the client\n\n---\n\n## WHAT YOU CAN DO\n\n- Answer questions about available properties\n- Explain how the purchase or rental process works\n- Inform clients about required documentation\n- Schedule visits\n- Look up available properties in the spreadsheet\n- Automatically register leads in the CRM\n\n---\n\n## COMPANY INFORMATION\n\n- Areas served: South Zone, West Zone and Downtown São Paulo\n- Property types: apartments, houses and commercial units\n- Sale price range: R$ 250,000 to R$ 2,500,000\n- Rental price range: R$ 1,200 to R$ 12,000/month\n- Human support hours:\n  - Monday to Friday: 9am to 6pm\n  - Saturday: 9am to 1pm\n- WhatsApp: [YOUR WHATSAPP NUMBER]\n- Website: [YOUR WEBSITE]\n\n---\n\n## REQUIRED DOCUMENTATION\n\n### Purchase\n\n- ID and Tax ID (RG and CPF)\n- Proof of income\n- Proof of address\n- Marital status certificate\n- FGTS and bank loan approval (if financing)\n\n### Rental\n\n- ID and Tax ID (RG and CPF)\n- Proof of income\n- Proof of address\n- Guarantee:\n  - Guarantor\n  - Lease insurance (seguro-fiança)\n  - Security deposit\n\n---\n\n## PURCHASE PROCESS\n\n1. Property selection\n2. Visit\n3. Offer\n4. Document review\n5. Contract\n6. Registration and handover\n\nAverage timeline:\n30 to 60 days\n\n---\n\n## RENTAL PROCESS\n\n1. Property selection\n2. Visit\n3. Document review\n4. Guarantee\n5. Contract\n6. Key handover\n\nAverage timeline:\n5 to 10 business days\n\n---\n\n## FREQUENTLY ASKED QUESTIONS\n\n### Do you negotiate the price?\nYes. We can present offers to the property owner.\n\n### Can I use FGTS?\nYes, following Caixa's (Brazil's federal savings bank) rules.\n\n### Do you accept pets?\nIt depends on the property. Ask about Pet Friendly listings.\n\n### Is there a brokerage fee?\nOn sales, the commission is paid by the seller.\nOn rentals, we do not charge the tenant any fee.\n\n---\n\n## MANDATORY TOOL EXECUTION\n\nWhen you identify that the client has genuine interest in buying or renting a property, you MUST execute the \"Register Lead in CRM\" tool BEFORE replying to the client.\n\nNever reply without registering or updating the lead first.\n\nConsider the following as genuine interest:\n\n- Requests for available properties\n- Interest in renting or buying\n- Visit requests\n- Questions about neighborhoods\n- Questions about number of bedrooms\n- Questions about budget\n- Requests for recommendations\n- Continuation of a previous conversation about a property\n\nIf the lead already exists:\n- Update the relevant data\n- Update the conversation summary\n- Update the property of interest\n- Update the next step\n\nIf the lead does not exist yet:\n- Create a new record\n\nIf any information is missing from the email, use:\n\n- Name: \"Not provided\"\n- Phone: \"Not provided\"\n- Preferred Region: \"Not provided\"\n- Maximum Budget: 0\n- Property of Interest ID: \"Not provided\"\n- Status: \"New lead\"\n\nAfter executing the \"Register Lead in CRM\" tool:\n- Reply normally to the client\n- Suggest next steps\n- Suggest scheduling a visit when appropriate\n\n---\n\n## TOOL USAGE\n\n### Tool: Search Available Properties\n\nALWAYS use this tool when the client:\n\n- Asks for available properties\n- Requests recommendations\n- Mentions a region\n- Mentions a budget\n- Mentions a number of bedrooms\n- Asks for specific properties\n\nCheck the spreadsheet before recommending properties.\n\nNever make up information.\n\n---\n\n### Tool: Register Lead in CRM\n\nALWAYS use this tool when there is genuine interest.\n\nRequired fields:\n\n- Date\n- Name\n- Email\n- Phone\n- Preferred Region\n- Maximum Budget\n- Property of Interest (ID)\n- Conversation Summary\n- Status\n- Next Step\n\n---\n\n## IMPORTANT RULES\n\n1. Never make up properties\n2. Always check the spreadsheet before recommending anything\n3. If no property is available:\n   - inform the client politely\n   - mention that new units are added every week\n4. Never speak badly about competitors\n5. Suggest WhatsApp when there is clear interest\n6. Ask questions to better understand the client's profile\n7. Do not answer questions unrelated to real estate\n\nIf the topic is not related to real estate:\n\n\"My focus is helping you find the ideal property! How can I help you with that?\"\n\n---\n\n## RESPONSE FORMATTING\n\nALWAYS reply in valid HTML.\n\nUse:\n- <b> for bold\n- <br> for line breaks\n- <ul> and <li> for lists\n- <a href=\"\"> for links\n\nNever send everything as a single paragraph.\n\nStructure the response clearly and neatly.\n\n---\n\n## IMPORTANT\n\nBefore replying:\n\n1. Analyze the client's interest\n2. If necessary:\n   - execute the Search Available Properties tool\n   - execute the Register Lead in CRM tool\n3. Then reply to the email\n4. Always keep a professional and welcoming tone\n```"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1008,
+        752
+      ],
+      "name": "Real Estate AI Agent",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000,
+      "id": "a1fd534e-dd6c-4313-85dc-a5a33de60feb"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        704,
+        960
+      ],
+      "name": "Primary AI Model (Google Gemini)",
+      "id": "9238a6c4-66cd-43f5-abee-2e82a07b7c0a"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.threadId }}",
+        "sessionTTL": 100,
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.6,
+      "position": [
+        1088,
+        1008
+      ],
+      "name": "Conversation Memory (Redis)",
+      "id": "f8854be6-6ea3-4dc1-a666-21c4285dadd2"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "GOOGLE_SHEETS_URL_REMOVED",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 64769523,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "GOOGLE_SHEETS_URL_REMOVED"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1520,
+        944
+      ],
+      "name": "Search Available Properties (Google Sheets)",
+      "id": "fb7c8cdc-0a03-4c21-8765-15d84ef29121",
+      "notes": "Use this tool to look up available properties."
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "GOOGLE_SHEETS_URL_REMOVED",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "GOOGLE_SHEETS_URL_REMOVED"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "E-mail": "={{ $json.from.value[0].address }}",
+            "Data": "={{ $today }}",
+            "Nome": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Nome', ``, 'string') }}",
+            "Telefone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Telefone', ``, 'string') }}",
+            "Região de Preferência": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Regi_o_de_Prefer_ncia', ``, 'string') }}",
+            "Orçamento Máximo (R$)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Or_amento_M_ximo__R__', ``, 'string') }}",
+            "Imóvel de Interesse (ID)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Im_vel_de_Interesse__ID_', ``, 'string') }}",
+            "Resumo da Conversa": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Resumo_da_Conversa', ``, 'string') }}",
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Próximo Passo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Pr_ximo_Passo', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "E-mail"
+          ],
+          "schema": [
+            {
+              "displayName": "Data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Interesse (Compra/Aluguel)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "displayName": "Região de Preferência",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Quartos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "displayName": "Orçamento Máximo (R$)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Imóvel de Interesse (ID)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Resumo da Conversa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "displayName": "Próximo Passo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1248,
+        1008
+      ],
+      "name": "Register Lead in CRM (Google Sheets)",
+      "id": "c0500983-43fc-47cc-8de6-584acb705325",
+      "notes": "Use this tool to register the lead data in the spreadsheet."
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        896,
+        976
+      ],
+      "name": "Fallback AI Model (OpenAI)",
+      "id": "8be6512c-be5b-48e5-9bf6-c026518cfb8b"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Gmail Trigger').item.json.from.value[0].address }}",
+        "subject": "={{ $('Gmail Trigger').item.json.subject }}",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1392,
+        752
+      ],
+      "name": "Send Email Reply (Gmail)",
+      "id": "04b24287-bec7-41a7-b50e-fa008323a9b1",
+      "webhookId": "23fd991e-852b-4b8a-8515-4be2ad9f8357"
+    },
+    {
+      "parameters": {
+        "content": "## Workflow Overview\n\n- Monitors Gmail for property inquiries\n- Interprets client intent\n- Searches properties in Google Sheets\n- Registers/updates leads in the CRM sheet\n- Replies by email (HTML) via Gemini/OpenAI\n- Remembers conversation via Redis",
+        "height": 300,
+        "width": 360,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "name": "Sticky Note - Overview",
+      "id": "e960c886-a6d6-4e1b-ac40-75c117e6fb92"
+    },
+    {
+      "parameters": {
+        "content": "## Required Credentials\n\nAfter importing, configure:\n- Gmail OAuth2\n- Google Sheets OAuth2\n- Google Gemini API\n- OpenAI API\n- Redis",
+        "height": 300,
+        "width": 340,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        400,
+        0
+      ],
+      "name": "Sticky Note - Credentials",
+      "id": "2ec2747c-52b9-4684-8470-20cf1ea5f242"
+    },
+    {
+      "parameters": {
+        "content": "## Customize the AI Persona\n\n**Node:** Real Estate AI Agent\n\n- Example content for a fictitious agency, in English\n- Edit company name, service area, pricing, hours, FAQs\n- Translate for other languages/markets\n- Keep tool-usage rules intact",
+        "height": 300,
+        "width": 380,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        784,
+        0
+      ],
+      "name": "Sticky Note - AI Persona",
+      "id": "84cb00b7-3fb2-480f-ae9b-61b3199a3824"
+    },
+    {
+      "parameters": {
+        "content": "## Trigger Configuration\n\n**Node:** Gmail Trigger\n\n- Polls inbox every minute, up to 5 emails/poll\n- Requires Gmail OAuth2 credential (read access)\n- Don't rename — other nodes reference it by name",
+        "height": 280,
+        "width": 340,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1184
+      ],
+      "name": "Sticky Note - Trigger",
+      "id": "6676217d-a0e9-474d-a032-0aa1585e139f"
+    },
+    {
+      "parameters": {
+        "content": "## AI Model Configuration\n\n**Nodes:** Primary (Gemini) / Fallback (OpenAI)\n\n- Primary: Google Gemini (gemini-2.5-flash)\n- Fallback: OpenAI (gpt-5-mini) on failure\n- Add your own credentials on both nodes\n- Swap models independently per node",
+        "height": 300,
+        "width": 380,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        384,
+        1184
+      ],
+      "name": "Sticky Note - AI Model",
+      "id": "baac9e5a-0ea5-4ba1-b74a-f4d4d0de7a98"
+    },
+    {
+      "parameters": {
+        "content": "## Conversation Memory (Redis)\n\n**Node:** Conversation Memory (Redis)\n\n- Keeps recent messages per email thread\n- Session key = Gmail thread ID\n- TTL 100s, window 30 messages\n- Without Redis, agent loses cross-message context",
+        "height": 300,
+        "width": 340,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        800,
+        1184
+      ],
+      "name": "Sticky Note - Redis",
+      "id": "ea974db9-d7f5-438e-9bbe-62c8506c2c02"
+    },
+    {
+      "parameters": {
+        "content": "## CRM / Google Sheets Config\n\n**Nodes:** Search Available Properties / Register Lead in CRM\n\nRequires 2 sheet tabs:\n1. Properties (read) — ID, Tipo, Modalidade, Bairro, Metragem, Quartos, Suítes, Vagas, Preço, Condomínio, Destaques\n2. Leads/CRM (write, matched on E-mail) — Data, Nome, E-mail, Telefone, Região de Preferência, Orçamento Máximo, Imóvel de Interesse (ID), Resumo da Conversa, Status, Próximo Passo\n\nSelect your own sheet/tab on both nodes after import.",
+        "height": 430,
+        "width": 420,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1184,
+        1184
+      ],
+      "name": "Sticky Note - CRM Sheets",
+      "id": "e6a8bcf0-5c25-4dcd-b36c-8d4cbdd25266"
+    },
+    {
+      "parameters": {
+        "content": "## Email Reply Configuration\n\n**Node:** Send Email Reply (Gmail)\n\n- Replies to sender, reuses original subject\n- Sends the agent's output as HTML\n- Requires Gmail account with send permission",
+        "height": 280,
+        "width": 340,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1648,
+        1184
+      ],
+      "name": "Sticky Note - Email Reply",
+      "id": "71a028bc-dd59-4b2a-b71e-1aceabb9df6a"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Real Estate AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Primary AI Model (Google Gemini)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Real Estate AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversation Memory (Redis)": {
+      "ai_memory": [
+        [
+          {
+            "node": "Real Estate AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Available Properties (Google Sheets)": {
+      "ai_tool": [
+        [
+          {
+            "node": "Real Estate AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Register Lead in CRM (Google Sheets)": {
+      "ai_tool": [
+        [
+          {
+            "node": "Real Estate AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fallback AI Model (OpenAI)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Real Estate AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Real Estate AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send Email Reply (Gmail)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "tags": []
+}
